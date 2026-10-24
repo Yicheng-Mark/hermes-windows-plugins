@@ -1,0 +1,13 @@
+name: hermes-dpapi-secrets
+version: 0.1.0
+description: "Windows DPAPI secret source: resolves environment variables from a single DPAPI-encrypted secret file at startup, so provider keys never sit in plaintext in .env or auth.json. Stdlib-only (ctypes), read-only at runtime, no child processes, no network."
+author: Yicheng-Mark
+kind: general
+# Secret-source plugin: fetch() is invoked by the orchestrator (never by the agent), so the
+# agent-visible capability surface is empty by design.
+provides_tools: []
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []
