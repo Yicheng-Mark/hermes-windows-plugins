@@ -1,0 +1,18 @@
+name: hermes-windows-eventlog
+version: 0.1.0
+manifest_version: 2
+description: "Windows crash forensics for Hermes: decoded Application Error / Hang / WER / .NET crash records grouped by app and exception, unexpected-restart and bugcheck evidence from the System log, and a general structured event-log query. Read-only wevtapi via ctypes: no child processes, no network, no file writes. Windows only."
+author: Yicheng-Mark
+kind: general
+license: MIT
+homepage: https://github.com/Yicheng-Mark/hermes-windows-eventlog
+tags: [windows, diagnostics, crash, eventlog]
+provides_tools:
+  - win_crash_events
+  - win_shutdown_events
+  - win_eventlog_query
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []
