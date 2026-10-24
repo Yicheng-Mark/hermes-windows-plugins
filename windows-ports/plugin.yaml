@@ -1,0 +1,16 @@
+name: hermes-windows-ports
+version: 0.1.0
+manifest_version: 2
+description: "Answer 'who holds this port' on Windows: reads the TCP/UDP owner tables and returns the listening and established endpoints with PID, image name and path, plus filters by port, process, protocol and state. Read-only (iphlpapi via ctypes): no sockets opened, no child processes, no network, no file writes. Windows only."
+author: Yicheng-Mark
+kind: general
+license: MIT
+homepage: https://github.com/Yicheng-Mark/hermes-windows-ports
+tags: [windows, diagnostics, ports, netstat]
+provides_tools:
+  - win_port_owners
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []
