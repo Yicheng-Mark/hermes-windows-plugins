@@ -27,7 +27,7 @@ skill (`references/windows-quirks.md`) are referenced, not duplicated.
 ## Install
 
 ```sh
-hermes plugins install Yicheng-Mark/hermes-windows-ops --ref <FULL_40_CHAR_SHA>
+hermes plugins install hermes-windows-ops
 hermes plugins list
 hermes plugins enable hermes-windows-ops
 ```

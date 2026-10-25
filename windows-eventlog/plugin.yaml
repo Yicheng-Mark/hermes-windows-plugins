@@ -5,7 +5,7 @@ description: "Windows crash forensics for Hermes: decoded Application Error / Ha
 author: Yicheng-Mark
 kind: general
 license: MIT
-homepage: https://github.com/Yicheng-Mark/hermes-windows-eventlog
+homepage: https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-eventlog
 tags: [windows, diagnostics, crash, eventlog]
 provides_tools:
   - win_crash_events

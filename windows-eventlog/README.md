@@ -53,8 +53,8 @@ Two facts drove the design:
 ## Install
 
 ```bash
-git clone https://github.com/Yicheng-Mark/hermes-windows-eventlog \
-  ~/.hermes/plugins/hermes-windows-eventlog
+git clone --depth 1 https://github.com/Yicheng-Mark/hermes-windows-plugins /tmp/hermes-windows-plugins
+cp -r /tmp/hermes-windows-plugins/windows-eventlog ~/.hermes/plugins/hermes-windows-eventlog
 hermes plugins enable hermes-windows-eventlog
 ```
 

@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Windows and WSL operations triage for Hermes: processes that survive a quit, WSL-to-Windows interop failures, and the path, encoding and console traps that only show up on Windows.",
   "author": { "name": "Yicheng-Mark", "url": "https://github.com/Yicheng-Mark" },
-  "repository": "https://github.com/Yicheng-Mark/hermes-windows-ops",
+  "repository": "https://github.com/Yicheng-Mark/hermes-windows-plugins",
   "license": "MIT",
   "keywords": ["windows", "wsl", "diagnostics", "troubleshooting", "processes"]
 }

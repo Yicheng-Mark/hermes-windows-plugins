@@ -5,7 +5,7 @@ description: "Answer 'who holds this port' on Windows: reads the TCP/UDP owner t
 author: Yicheng-Mark
 kind: general
 license: MIT
-homepage: https://github.com/Yicheng-Mark/hermes-windows-ports
+homepage: https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-ports
 tags: [windows, diagnostics, ports, netstat]
 provides_tools:
   - win_port_owners

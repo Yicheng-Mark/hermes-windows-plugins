@@ -51,8 +51,8 @@ process that survived a crash, or checking that only `127.0.0.1` is listening.
 ## Install
 
 ```bash
-git clone https://github.com/Yicheng-Mark/hermes-windows-ports \
-  ~/.hermes/plugins/hermes-windows-ports
+git clone --depth 1 https://github.com/Yicheng-Mark/hermes-windows-plugins /tmp/hermes-windows-plugins
+cp -r /tmp/hermes-windows-plugins/windows-ports ~/.hermes/plugins/hermes-windows-ports
 hermes plugins enable hermes-windows-ports
 ```
 

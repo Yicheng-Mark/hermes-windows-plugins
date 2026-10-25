@@ -13,8 +13,8 @@ requires-python = ">=3.11"
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/Yicheng-Mark/hermes-windows-ports"
-Issues = "https://github.com/Yicheng-Mark/hermes-windows-ports/issues"
+Homepage = "https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-ports"
+Issues = "https://github.com/Yicheng-Mark/hermes-windows-plugins/issues"
 
 [project.optional-dependencies]
 test = ["pytest>=8,<10"]

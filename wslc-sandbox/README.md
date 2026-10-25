@@ -37,8 +37,8 @@ Hermes resolves `wslc.exe` through `HERMES_WSLC_BINARY`, then `PATH`, then
 `C:\Program Files\WSL\wslc.exe`.
 
 ```bash
-git clone https://github.com/Yicheng-Mark/hermes-wslc-sandbox \
-  ~/.hermes/plugins/hermes-wslc-sandbox
+git clone --depth 1 https://github.com/Yicheng-Mark/hermes-windows-plugins /tmp/hermes-windows-plugins
+cp -r /tmp/hermes-windows-plugins/wslc-sandbox ~/.hermes/plugins/hermes-wslc-sandbox
 hermes plugins enable hermes-wslc-sandbox
 hermes config set terminal.backend wslc
 hermes doctor          # shows the wslc rows, including what the sandbox cannot harden

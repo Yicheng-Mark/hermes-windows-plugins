@@ -25,7 +25,7 @@ provider key that should not sit in a dotfile.* On Windows the OS already has th
 DPAPI derives a key from your Windows profile, so a file encrypted with it is readable by
 that user on that machine and by nothing else.
 
-The alternative on this platform is [`hermes-wincred`](https://github.com/Yicheng-Mark/hermes-wincred),
+The alternative on this platform is [`hermes-wincred`](https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/wincred),
 which reads individual items from Credential Manager. The difference is where the secret
 lives:
 
