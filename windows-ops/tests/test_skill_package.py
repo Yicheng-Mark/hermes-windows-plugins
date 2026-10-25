@@ -89,7 +89,15 @@ def test_relative_references_resolve(skill_md: Path):
 
 def test_package_ships_no_executable_payloads():
     banned = {".pyc", ".pyo", ".exe", ".dll", ".so", ".dylib", ".zip", ".tar", ".gz", ".wasm"}
+    # Bytecode and caches are produced by running the suite itself, not shipped with it, so the
+    # scan looks at what is in the package rather than at what this test just wrote.
+    ignored = {"__pycache__", ".pytest_cache", ".git", ".venv", "build", "dist"}
 
-    offenders = [p.relative_to(ROOT) for p in ROOT.rglob("*") if p.suffix.lower() in banned]
+    offenders = [
+        path.relative_to(ROOT)
+        for path in ROOT.rglob("*")
+        if path.suffix.lower() in banned
+        and not ignored.intersection(path.relative_to(ROOT).parts)
+    ]
 
     assert not offenders, f"unreviewable payloads in the package: {offenders}"
