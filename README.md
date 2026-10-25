@@ -18,6 +18,7 @@ its own capabilities, and pins its own version.
 | [`dpapi-secrets/`](dpapi-secrets/) | `hermes-dpapi-secrets` | secret source | Resolve provider keys from one DPAPI-encrypted file instead of `.env` |
 | [`windows-eventlog/`](windows-eventlog/) | `hermes-windows-eventlog` | tools | `win_crash_events`, `win_shutdown_events`, `win_eventlog_query` — why a process died, decoded |
 | [`windows-ports/`](windows-ports/) | `hermes-windows-ports` | tools | `win_port_owners` — which process holds a port, with PID, image name and path |
+| [`windows-process/`](windows-process/) | `hermes-windows-process` | tools | `win_process_table` — what is running, who started it, and what outlived its parent |
 
 Every plugin is read-only where the platform allows it, stdlib-only (`ctypes` against
 `advapi32`, `crypt32`, `wevtapi`, `iphlpapi`), and starts no child processes unless the
@@ -34,6 +35,7 @@ wincred/             code plugin: plugin.yaml + hermes_wincred/ + tests/
 dpapi-secrets/       code plugin: plugin.yaml + hermes_dpapi_secrets/ + tests/
 windows-eventlog/    code plugin: plugin.yaml + hermes_windows_eventlog/ + tests/
 windows-ports/       code plugin: plugin.yaml + hermes_windows_ports/ + tests/
+windows-process/     code plugin: plugin.yaml + hermes_windows_process/ + tests/
 ```
 
 A catalog entry names the subdirectory it installs, for example:

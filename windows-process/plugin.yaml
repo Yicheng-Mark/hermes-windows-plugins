@@ -1,0 +1,16 @@
+name: hermes-windows-process
+version: 0.1.0
+manifest_version: 2
+description: "Answer 'what is still running, and who started it' on Windows: reads the process table with parent PID, image path and start time, and flags processes whose parent is gone or whose parent PID was reused by a newer process. Read-only (kernel32 via ctypes): no process is written to, no child process is started, no network, no file writes. Windows only."
+author: Yicheng-Mark
+kind: general
+license: MIT
+homepage: https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-process
+tags: [windows, diagnostics, processes, orphans]
+provides_tools:
+  - win_process_table
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []
