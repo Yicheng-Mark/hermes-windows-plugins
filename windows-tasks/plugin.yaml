@@ -1,0 +1,17 @@
+name: hermes-windows-tasks
+version: 0.1.0
+manifest_version: 2
+description: "Answer 'what does this machine run on its own, and did it work' on Windows: lists every Task Scheduler task with its state, the account it runs as, its action, its triggers, its last and next run, its missed runs and the meaning of its last result code (0x80070002 is a program that is no longer there, 0x800710E0 a task that needs a desktop), and details one task from its exported definition. Read-only: the ScheduledTasks cmdlets are queried, nothing is created, started, changed or deleted; no network, no file writes. Windows only."
+author: Yicheng-Mark
+kind: general
+license: MIT
+homepage: https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-tasks
+tags: [windows, diagnostics, scheduled-tasks, automation]
+provides_tools:
+  - win_scheduled_tasks
+  - win_scheduled_task_detail
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []

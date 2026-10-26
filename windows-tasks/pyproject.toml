@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hermes-windows-tasks"
+version = "0.1.0"
+description = "Read-only scheduled-task tools for Hermes Agent on Windows"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-tasks"
+Issues = "https://github.com/Yicheng-Mark/hermes-windows-plugins/issues"
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[tool.setuptools.packages.find]
+include = ["hermes_windows_tasks*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
