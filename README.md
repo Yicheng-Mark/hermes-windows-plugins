@@ -20,6 +20,7 @@ its own capabilities, and pins its own version.
 | [`windows-ports/`](windows-ports/) | `hermes-windows-ports` | tools | `win_port_owners` — which process holds a port, with PID, image name and path |
 | [`windows-process/`](windows-process/) | `hermes-windows-process` | tools | `win_process_table` — what is running, who started it, and what outlived its parent |
 | [`windows-tasks/`](windows-tasks/) | `hermes-windows-tasks` | tools | `win_scheduled_tasks`, `win_scheduled_task_detail` — what the machine schedules on its own, when it runs next, and what its last result code meant |
+| [`windows-services/`](windows-services/) | `hermes-windows-services` | tools | `win_service_table`, `win_service_detail` — what runs as a service, why one failed, and what it depends on |
 
 Every plugin is read-only where the platform allows it, stdlib-only (`ctypes` against
 `advapi32`, `crypt32`, `wevtapi`, `iphlpapi`), and starts no child processes unless the
@@ -38,6 +39,7 @@ windows-eventlog/    code plugin: plugin.yaml + hermes_windows_eventlog/ + tests
 windows-ports/       code plugin: plugin.yaml + hermes_windows_ports/ + tests/
 windows-process/     code plugin: plugin.yaml + hermes_windows_process/ + tests/
 windows-tasks/       code plugin: plugin.yaml + hermes_windows_tasks/ + tests/
+windows-services/    code plugin: plugin.yaml + hermes_windows_services/ + tests/
 ```
 
 A catalog entry names the subdirectory it installs, for example:

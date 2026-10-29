@@ -1,0 +1,17 @@
+name: hermes-windows-services
+version: 0.1.0
+manifest_version: 2
+description: "Answer 'what runs as a service on this Windows machine, why did one fail, and what does it depend on' on Windows: lists every service with its state, start mode, delayed-autostart flag, the account and binary it runs, its dependencies both ways, and the meaning of its exit code (1077 is one that never tried to start, 1053 one that did not answer, 1075 one whose dependency failed first); details one service with what Windows does when it fails (restart, reboot, run a command, and after how long), the SCM event-log failures behind that exit code, and whether the binary is still where its registration says. Read-only: CIM and the registry are queried, nothing is started, stopped, reconfigured or deleted; no network, no file writes. Windows only."
+author: Yicheng-Mark
+kind: general
+license: MIT
+homepage: https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-services
+tags: [windows, diagnostics, services]
+provides_tools:
+  - win_service_table
+  - win_service_detail
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []
