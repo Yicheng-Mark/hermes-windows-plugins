@@ -22,6 +22,7 @@ its own capabilities, and pins its own version.
 | [`windows-tasks/`](windows-tasks/) | `hermes-windows-tasks` | tools | `win_scheduled_tasks`, `win_scheduled_task_detail` — what the machine schedules on its own, when it runs next, and what its last result code meant |
 | [`windows-services/`](windows-services/) | `hermes-windows-services` | tools | `win_service_table`, `win_service_detail` — what runs as a service, why one failed, and what it depends on |
 | [`windows-devices/`](windows-devices/) | `hermes-windows-devices` | tools | `win_device_table`, `win_device_detail` — which device is unhappy, what it needs, and what drives it |
+| [`windows-startup/`](windows-startup/) | `hermes-windows-startup` | tools | `win_startup_table`, `win_startup_detail` — what launches itself at sign-in, from where, and what was switched off |
 
 Every plugin is read-only where the platform allows it, stdlib-only (`ctypes` against
 `advapi32`, `crypt32`, `wevtapi`, `iphlpapi`), and starts no child processes unless the
@@ -42,6 +43,7 @@ windows-process/     code plugin: plugin.yaml + hermes_windows_process/ + tests/
 windows-tasks/       code plugin: plugin.yaml + hermes_windows_tasks/ + tests/
 windows-services/    code plugin: plugin.yaml + hermes_windows_services/ + tests/
 windows-devices/     code plugin: plugin.yaml + hermes_windows_devices/ + tests/
+windows-startup/     code plugin: plugin.yaml + hermes_windows_startup/ + tests/
 ```
 
 A catalog entry names the subdirectory it installs, for example:

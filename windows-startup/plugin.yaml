@@ -1,0 +1,17 @@
+name: hermes-windows-startup
+version: 0.1.0
+manifest_version: 2
+description: "Answer 'what launches itself on this Windows machine' : lists every autostart entry across the six Run/RunOnce registry keys (HKCU, HKLM, and the 32-bit views) and the two Startup folders, with where each one comes from, whether it is machine- or user-scoped, and whether the person switched it off in Task Manager (the StartupApproved verdict, with when it was last changed) - a state Win32_StartupCommand has no field for; also reports approval records uninstalled programs left behind. Details one entry with the binary its command resolves to and whether that is still on disk, and a folder file's size and last change. Read-only: registry keys and folders are enumerated, nothing is enabled, disabled or deleted; no network, no file writes. Windows only."
+author: Yicheng-Mark
+kind: general
+license: MIT
+homepage: https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-startup
+tags: [windows, diagnostics, startup, autostart]
+provides_tools:
+  - win_startup_table
+  - win_startup_detail
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []
