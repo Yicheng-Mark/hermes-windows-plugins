@@ -206,8 +206,11 @@ def win_service_detail(args: Dict[str, Any], **kwargs: Any) -> str:
         )
 
     name = str(item.get("name"))
-    facts = _registry_facts([name]).get(name.lower(), {}) or {}
-    dependents = _reverse({name: facts}).get(name.lower()) or []
+    # the same one sweep the table runs: own facts under the registered spelling,
+    # dependents from everyone else's DependOnService
+    registry = _registry_facts([other.get("name") for other in raw])
+    facts = registry.get(name, {}) or {}
+    dependents = _reverse(registry).get(name.lower()) or []
     row = _row({**item, "delayed": bool(item.get("delayed")) or facts.get("delayed", False)},
                facts.get("depends_on") or [], dependents)
 

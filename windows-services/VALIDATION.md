@@ -57,3 +57,28 @@ the Services snap-in shows:
 - `win_service_detail` on a service whose binary was uninstalled reports the exit code's
   meaning (`2`, the binary could not be found) and a note that the registered binary is no
   longer on disk.
+
+## The review delta (after e278adf4)
+
+Three fixes from the catalog review, each with a regression test:
+
+- **The module imports where `winreg` does not exist.** The registry helpers took
+  `opener: Callable = winreg.OpenKey` as a default argument — evaluated once at import
+  time, so on a machine without `winreg` the import itself raised `AttributeError` and
+  `hermes plugins validate` could not load the plugin. The defaults are now `None`
+  sentinels resolved at call time (`_value` already did this). Test:
+  `test_module_imports_where_winreg_does_not_exist` reloads the module with a meta-path
+  blocker that raises on `import winreg`, asserts the import survives and that a registry
+  read then raises `RegistryUnavailable` (an answer, not a crash).
+- **Mixed-case service names keep their registry facts.** The detail tool looked the
+  sweep up under `name.lower()` while the sweep keys by the registered spelling, so
+  `Dhcp` lost its dependencies and delayed flag when asked for as `dhcp`. Live check
+  after the fix: `win_service_detail({"name": "dhcp"})` reports `depends_on: NSI, Afd`.
+- **`dependents` is computed from the full sweep.** It used to be derived from the one
+  service's own facts, which can only ever be empty (a service's dependencies do not
+  name itself). It now runs the same single sweep the table runs and answers who lists
+  this service. Live check: `win_service_detail({"name": "dhcp"})` reports
+  `dependents: WinHttpAutoProxySvc`, end to end in 0.85 s including the event log read.
+
+After the delta: 20 tests pass (15 unit + 5 live, was 12 + 5), and the admission
+validator is 15/15 PASS with zero warnings on the working copy.

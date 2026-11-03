@@ -50,7 +50,7 @@ def _value(name: str, value_name: str, opener: Callable | None = None):
         return None
 
 
-def depends_on(name: str, opener: Callable = winreg.OpenKey) -> list[str]:
+def depends_on(name: str, opener: Callable | None = None) -> list[str]:
     """The services and groups this one waits for, '+' prefixed when it names a group."""
     raw = _value(name, "DependOnService", opener)
     if not raw:
@@ -59,7 +59,7 @@ def depends_on(name: str, opener: Callable = winreg.OpenKey) -> list[str]:
     return [item[1:] + " (group)" if item.startswith(_GROUP) else item for item in items]
 
 
-def delayed_start(name: str, opener: Callable = winreg.OpenKey) -> bool:
+def delayed_start(name: str, opener: Callable | None = None) -> bool:
     """Whether an Automatic service waits a minute after boot before starting."""
     return _value(name, "DelayedAutostart", opener) == 1
 
@@ -85,7 +85,7 @@ def _actions(blob: bytes) -> list[dict]:
     return actions
 
 
-def failure_policy(name: str, opener: Callable = winreg.OpenKey) -> dict | None:
+def failure_policy(name: str, opener: Callable | None = None) -> dict | None:
     """What Windows does when this service fails, and when it forgets the failures."""
     blob = _value(name, "FailureActions", opener)
     if not blob:

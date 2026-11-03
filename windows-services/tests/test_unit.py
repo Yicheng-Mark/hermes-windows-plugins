@@ -122,12 +122,16 @@ CIM = [
     {"name": "bits", "display": "BITS", "state": "Running", "start": "Auto",
      "delayed": True, "pid": 0, "exit_code": 0, "account": "LocalSystem",
      "binary": r"C:\Windows\system32\svchost.exe", "description": None},
+    {"name": "Dhcp", "display": "DHCP Client", "state": "Running", "start": "Auto",
+     "delayed": False, "pid": 0, "exit_code": 0, "account": "LocalSystem",
+     "binary": r"C:\Windows\system32\svchost.exe -k netsvcs", "description": None},
 ]
 
 REG = {
-    "wuauserv": {"DependOnService": ["rpcss"], "DelayedAutostart": 1},
+    "wuauserv": {"DependOnService": ["rpcss", "dns"], "DelayedAutostart": 1},
     "broken": {"FailureActions": _blob([(1, 5000)])},
     "dns": {"DependOnService": ["nsi", "+TDI"]},
+    "Dhcp": {"DependOnService": ["nsi"], "DelayedAutostart": 1},
 }
 
 
@@ -172,7 +176,7 @@ def test_table_lists_filters_and_reverse_dependencies(faked):
     assert any("non-zero exit code" in note for note in only_failed["notes"])
 
     started = _load(tools.win_service_table({"state": "running"}))
-    assert {row["name"] for row in started["services"]} == {"dns", "bits"}
+    assert {row["name"] for row in started["services"]} == {"dns", "bits", "Dhcp"}
 
     narrow = _load(tools.win_service_table({"query": "update"}))
     assert [row["name"] for row in narrow["services"]] == ["wuauserv"]
@@ -221,3 +225,49 @@ def test_table_survives_a_dead_registry(monkeypatch):
     answer = _load(tools.win_service_table({}))
     assert answer["ok"] is True
     assert all(row["depends_on"] == [] for row in answer["services"])
+
+
+# --- the review fixes (the delta from e278adf4) ---------------------------
+
+def test_detail_keeps_registry_facts_for_mixed_case_names(faked):
+    """The registry sweep keys by the registered spelling; a detail asked as
+    'dhcp' must still see Dhcp's dependencies and delayed flag."""
+    answer = _load(tools.win_service_detail({"name": "dhcp"}))
+    assert answer["ok"] is True
+    assert answer["depends_on"] == ["nsi"]
+    assert answer["start"] == "Auto, delayed"
+
+
+def test_detail_dependents_come_from_the_full_sweep(faked):
+    """Who waits for this one is answered across every service's DependOnService,
+    the same sweep the table runs, not from this service's own facts."""
+    answer = _load(tools.win_service_detail({"name": "dns"}))
+    assert answer["dependents"] == ["wuauserv"]
+
+
+def test_module_imports_where_winreg_does_not_exist(monkeypatch):
+    """The catalog's Linux validator imports the plugin with no winreg present:
+    nothing may touch winreg at import time (default arguments evaluate then),
+    and a missing registry is a raised, answerable error, not a crash."""
+    import importlib
+    import sys
+
+    class _Blocked:
+        def find_spec(self, fullname, path=None, target=None):
+            if fullname == "winreg":
+                raise ImportError("blocked: simulating a non-Windows import")
+            return None
+
+    blocker = _Blocked()
+    saved = sys.modules.pop("winreg", None)
+    sys.meta_path.insert(0, blocker)
+    try:
+        importlib.reload(svcreg)
+        assert svcreg.winreg is None
+        with pytest.raises(svcreg.RegistryUnavailable):
+            svcreg.depends_on("anything")
+    finally:
+        sys.meta_path.remove(blocker)
+        if saved is not None:
+            sys.modules["winreg"] = saved
+        importlib.reload(svcreg)
