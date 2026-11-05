@@ -1,0 +1,17 @@
+name: hermes-windows-updates
+version: 0.1.0
+manifest_version: 2
+description: "Answer 'what did Windows install lately, and did it work' on Windows: the update history the Settings app shows — Windows updates, Defender signature and platform updates, driver updates — newest first, with each entry's outcome in words (2 succeeded, 3 succeeded with errors, 4 failed, 5 aborted) and, when it did not end clean, the failure's error code in 0x form (the Agent hands codes over signed; -2145124300 is shown as its unsigned spelling); filter to the ones that did not end clean or by title. The hotfix list (KB numbers, security updates, install dates, newest first) answers 'when was this machine last patched' at a glance; it carries OS-level updates only, which the notes say. Read-only: the history is queried through the Windows Update Agent's session interface and CIM, and nothing else — no search is run, nothing is downloaded, installed or uninstalled; no network, no file writes. Windows only."
+author: Yicheng-Mark
+kind: general
+license: MIT
+homepage: https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-updates
+tags: [windows, diagnostics, updates]
+provides_tools:
+  - win_update_history
+  - win_hotfix_table
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []
