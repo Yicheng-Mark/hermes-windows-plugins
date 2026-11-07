@@ -1,0 +1,17 @@
+name: hermes-windows-firewall
+version: 0.1.0
+manifest_version: 2
+description: "Answer 'what does the Windows firewall let through, and for whom' : the rule store and the three profile switches, read straight from the registry where the firewall service itself keeps them. The table lists every rule in plain words -- allow or block, inbound or outbound, TCP/UDP/ICMP or a protocol number, local and remote ports, the program or service the rule is scoped to, which profile it belongs to (Domain, Private, Public or any) and whether it is switched on -- plus each profile's firewall switch and default actions. Built-in rules name themselves indirectly (@FirewallAPI.dll,-32765); the words are resolved from the resource in the machine's own language, and third-party rules read as written. Details one rule in full: addresses with scope words (the local subnet, any address), edge traversal, the embedding group, the description, and fields the parser does not model are passed through verbatim rather than dropped; a switched-off rule says so. netsh labels localize with the display language, the registry does not -- which is why the plugin goes there: no netsh, no PowerShell, no WMI. Read-only: registry values are enumerated, nothing is enabled, disabled, added or removed; no network, no file writes, no elevation. Windows only."
+author: Yicheng-Mark
+kind: general
+license: MIT
+homepage: https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-firewall
+tags: [windows, diagnostics, firewall, security, network]
+provides_tools:
+  - win_firewall_table
+  - win_firewall_detail
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []
