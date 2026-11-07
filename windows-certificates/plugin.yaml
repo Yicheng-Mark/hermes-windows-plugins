@@ -1,0 +1,17 @@
+name: hermes-windows-certificates
+version: 0.1.0
+manifest_version: 2
+description: "Answer 'which certificate on this Windows machine expired, and what am I actually trusting' on Windows: walks the user's and the machine's certificate stores (MY, Root, CA) in-process through crypt32 - no certutil, no PowerShell - and lists every certificate with subject, issuer, validity window, self-signed or not, SHA-1 thumbprint and the store it lives in; the expiry arrives in words ('expired 45 days ago', 'expires in 12 days') and the list is sorted with the expired and soon-expiring first. One certificate in full adds the serial number, certificate version, the signature algorithm in words, the public key's algorithm, named curve and size in bits (2048-bit RSA, P-256), and the purposes it is valid for (server authentication, code signing...; no EKU extension is reported as 'does not restrict its purposes', which is what its absence means). Find it by thumbprint or by a subject substring, across the user's and the machine's copies. Read-only: stores are opened read-only and only enumerated - nothing is added, removed or changed; no network, no file writes, no elevation, no child processes. Windows only."
+author: Yicheng-Mark
+kind: general
+license: MIT
+homepage: https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-certificates
+tags: [windows, diagnostics, certificates, pki]
+provides_tools:
+  - win_cert_table
+  - win_cert_detail
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []
