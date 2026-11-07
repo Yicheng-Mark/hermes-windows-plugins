@@ -1,0 +1,17 @@
+name: hermes-windows-disks
+version: 0.1.0
+manifest_version: 2
+description: "Answer 'are this machine's disks healthy, and which volume is filling up' on Windows: one table of every physical disk (model, serial, SSD/HDD/SCM, bus - nvme, sata, usb -, size, the storage stack's health word, GPT or MBR, boot/system flags, partition count) and every volume (drive letter, label, file system, capacity, free space with its percentage, fixed/removable/network/cd-rom, the disk a volume lives on, the UNC path behind a mapped drive); volumes without a drive letter (EFI, recovery) are hidden unless asked for. win_disk_detail reads one disk or volume - by drive letter, label, model, serial or disk number - with the health in words (warning, unhealthy, and 'unknown', which the storage stack reports on a perfectly healthy NVMe while OperationalStatus says ok - both are shown), the partition layout decoded from its GUID type (EFI system, Microsoft reserved, basic data, recovery), each partition's size, offset and letter, the largest contiguous free extent, and a plain-word free-space verdict (under 5 percent critical, under 10 percent low). Use it for 'why is the disk slow', 'will this drive fail', 'where did the space go'. Read-only: the storage classes are queried in one PowerShell CIM session, nothing is defragmented, formatted, resized, checked or repaired; no writes, no elevation, no network calls of its own. Enum values arrive as numbers and are decoded here - a Chinese-language Windows 11 was verified never to reach the answer. Windows only."
+author: Yicheng-Mark
+kind: general
+license: MIT
+homepage: https://github.com/Yicheng-Mark/hermes-windows-plugins/tree/main/windows-disks
+tags: [windows, diagnostics, storage]
+provides_tools:
+  - win_disk_table
+  - win_disk_detail
+provides_hooks: []
+provides_middleware: []
+requires_env: []
+requires_hermes: ">=0.21.4"
+pip_dependencies: []
